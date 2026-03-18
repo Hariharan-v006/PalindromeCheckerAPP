@@ -1,6 +1,4 @@
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class Palindrome_checker_application {
     private static final String Welcome_msg = "Welcome to the Palindrome Checker Management System";
@@ -15,11 +13,13 @@ public class Palindrome_checker_application {
         text = text.toLowerCase(Locale.ROOT);
         boolean flag = true;
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
         for( char c: text.toCharArray()){
             stack.push(c);
+            queue.add(c);
         }
-        for(char c: text.toCharArray()){
-            if(!stack.pop().equals(c)){
+        for ( int i=0; i<text.length(); i++ ){
+            if(!stack.pop().equals(queue.remove())){
                 flag = false;
                 break;
             }
