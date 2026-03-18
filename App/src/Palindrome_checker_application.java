@@ -11,11 +11,17 @@ public class Palindrome_checker_application {
         System.out.print("Enter the text: ");
         String text = input.nextLine();
         text = text.toLowerCase(Locale.ROOT);
-        StringBuilder sb = new StringBuilder();
-        for(int i = text.length()-1; i>=0; i--){
-            sb.append(text.charAt(i));
+        boolean flag = true;
+        char[] test_string = text.toCharArray();
+        int start = 0;
+        int end = text.length()-1;
+        while(start<end){
+            if(test_string[start] != test_string[end]){
+                flag = false;
+                break;
+            }
+            start++; end--;
         }
-        if ( text.equals(sb.toString())) System.out.println("It is a palindrome");
-        else System.out.println("Not a palindrome");
+        System.out.println((flag)?"It's a palindrome":"Not a palindrome");
     }
 }
