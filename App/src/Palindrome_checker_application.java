@@ -35,6 +35,22 @@ class DequeStrategy implements PalindromeStrategy {
     }
 }
 
+class TwoPointerStrategy implements PalindromeStrategy {
+    public boolean check(String input) {
+        String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
+        int left = 0;
+        int right = normalized.length() - 1;
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+
 public class Palindrome_checker_application {
     private static final String Welcome_msg = "Welcome to the Palindrome Checker Management System";
     private static final String Version = "1.0";
@@ -46,18 +62,25 @@ public class Palindrome_checker_application {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter text: ");
         String input = sc.nextLine();
-        System.out.print("Choose strategy (1-Stack, 2-Deque): ");
-        int choice = sc.nextInt();
 
-        PalindromeStrategy strategy;
+        PalindromeStrategy[] strategies = {
+                new StackStrategy(),
+                new DequeStrategy(),
+                new TwoPointerStrategy()
+        };
 
-        if (choice == 1) {
-            strategy = new StackStrategy();
-        } else {
-            strategy = new DequeStrategy();
+        String[] names = {
+                "Stack Strategy",
+                "Deque Strategy",
+                "Two Pointer Strategy"
+        };
+
+        for (int i = 0; i < strategies.length; i++) {
+            long start = System.nanoTime();
+            boolean result = strategies[i].check(input);
+            long end = System.nanoTime();
+            long duration = end - start;
+            System.out.println(names[i] + " -> Result: " + result + ", Time: " + duration + " ns");
         }
-
-        boolean result = strategy.check(input);
-        System.out.println("Is it a palindrome? " + result);
     }
 }
