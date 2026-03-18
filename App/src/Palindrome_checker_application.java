@@ -1,8 +1,22 @@
 import java.util.Locale;
 import java.util.Scanner;
 
-
-
+class PalindromeChecker {
+    public boolean checkPalindrome(String input) {
+        String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
+        char[] arr = normalized.toCharArray();
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            if (arr[left] != arr[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
 public class Palindrome_checker_application {
     private static final String Welcome_msg = "Welcome to the Palindrome Checker Management System";
     private static final String Version = "1.0";
@@ -14,8 +28,8 @@ public class Palindrome_checker_application {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter text: ");
         String input = sc.nextLine();
-        String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
-        String reversed = new StringBuilder(normalized).reverse().toString();
-        System.out.println("Is it a palindrome? " + normalized.equals(reversed));
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(input);
+        System.out.println("Is it a palindrome? " + result);
     }
 }
