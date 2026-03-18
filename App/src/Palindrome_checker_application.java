@@ -12,14 +12,12 @@ public class Palindrome_checker_application {
         String text = input.nextLine();
         text = text.toLowerCase(Locale.ROOT);
         boolean flag = true;
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
-        for( char c: text.toCharArray()){
-            stack.push(c);
-            queue.add(c);
+        Deque<Character> deque = new ArrayDeque<>();
+        for(char c: text.toCharArray()){
+            deque.add(c);
         }
-        for ( int i=0; i<text.length(); i++ ){
-            if(!stack.pop().equals(queue.remove())){
+        while(deque.size()>1){
+            if(!deque.removeFirst().equals(deque.removeLast())){
                 flag = false;
                 break;
             }
