@@ -1,5 +1,7 @@
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Stack;
+
 public class Palindrome_checker_application {
     private static final String Welcome_msg = "Welcome to the Palindrome Checker Management System";
     private static final String Version = "1.0";
@@ -12,15 +14,15 @@ public class Palindrome_checker_application {
         String text = input.nextLine();
         text = text.toLowerCase(Locale.ROOT);
         boolean flag = true;
-        char[] test_string = text.toCharArray();
-        int start = 0;
-        int end = text.length()-1;
-        while(start<end){
-            if(test_string[start] != test_string[end]){
+        Stack<Character> stack = new Stack<>();
+        for( char c: text.toCharArray()){
+            stack.push(c);
+        }
+        for(char c: text.toCharArray()){
+            if(!stack.pop().equals(c)){
                 flag = false;
                 break;
             }
-            start++; end--;
         }
         System.out.println((flag)?"It's a palindrome":"Not a palindrome");
     }
